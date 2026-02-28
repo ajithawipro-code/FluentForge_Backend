@@ -12,14 +12,15 @@ import { analyticsRoute } from "./src/routes/analytics.route.js";
 dotenv.config();
 const app=express();
 
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://timely-cat-2e2a41.netlify.app"
+  ],
+  credentials: true
+}))
 
-app.get("/", (req,res)=>{
-
-    res.json({message: "This is testing route"});
-})
-
+app.use(express.json())
 
 app.use("/auth",authRoute);
 app.use("/learning", learningRoute);
